@@ -5,10 +5,25 @@ pipeline {
 		}
 	}
 	stages {
-		stage("build") {
+		stage("Test") {
 			steps {
-				sh "python --version"
+				sh '''python -c 'import os; print("os.urandom(20)")''''
+				sh 'echo "Hello, World!"'
 			}
+		}
+	}
+	post {
+		always {
+			echo "This will always run"
+		}
+		success {
+			echo "Successful"
+		}
+		failure {
+			echo "Failured"
+		}
+		changed {
+			echo "Pipeline state change"
 		}
 	}
 }

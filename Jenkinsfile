@@ -7,7 +7,7 @@ pipeline {
 	stages {
 		stage("Test") {
 			steps {
-				sh '''python -c 'import os; print("os.urandom(20)")''''
+				sh "python -c 'import os; print(os.urandom(20))'"
 				sh 'echo "Hello, World!"'
 			}
 		}

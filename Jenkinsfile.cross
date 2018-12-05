@@ -30,8 +30,10 @@ pipeline {
 
 		stage("Test in Docker on Windows") {
 			agent {
-				docker { image "alpine:latest" }
-				label "windows"
+				docker { 
+					image "alpine:latest" 
+					label "windows"
+				}
 			}
 
 			steps {

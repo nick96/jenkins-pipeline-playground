@@ -1,0 +1,56 @@
+pipeline {
+	agent none
+	stages {
+		stage("Test in Windows") {
+			agent {
+				label "windows"
+			}
+			steps {
+				bat "echo 'Hello, World!'"
+			}
+		}
+
+		stage("Test in Linux") {
+			agent any
+			steps {
+				sh "echo 'Hello, World!'"
+			}
+		}
+
+
+		stage("Test in Docker on Linux") {
+			agent {
+				docker { image "alpine:latest" }
+			}
+
+			steps {
+				sh "echo 'Hello, World!'"
+			}
+		}
+
+		stage("Test in Docker on Windows") {
+			agent {
+				docker { image "alpine:latest" }
+				label "windows"
+			}
+
+			steps {
+				sh "echo 'Hello, World!'"
+			}
+		}
+	}
+	post {
+		always {
+			echo "This will always run"
+		}
+		success {
+			echo "Successful"
+		}
+		failure {
+			echo "Failured"
+		}
+		changed {
+			echo "Pipeline state change"
+		}
+	}
+}

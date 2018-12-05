@@ -2,14 +2,12 @@ pipeline {
 	agent {
 		docker {
 			image "python:3.7.1"
-			args "-u root:root"
 		}
 	}
 	stages {
 		stage("Test") {
 			steps {
-				sh "python -c 'import os; print(os.urandom(20))'"
-				sh 'echo "Hello, World!"'
+				sh "python -c 'print(\"Hello, World!\")'"
 			}
 		}
 	}

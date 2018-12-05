@@ -1,0 +1,26 @@
+pipeline {
+	agent {
+		label "windows"
+	}
+	stages {
+		stage("Test") {
+			steps {
+				sh "echo 'Hello, World!"
+			}
+		}
+	}
+	post {
+		always {
+			echo "This will always run"
+		}
+		success {
+			echo "Successful"
+		}
+		failure {
+			echo "Failured"
+		}
+		changed {
+			echo "Pipeline state change"
+		}
+	}
+}
